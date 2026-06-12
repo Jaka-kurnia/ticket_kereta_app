@@ -13,6 +13,7 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
     private lateinit var sessionManager: SessionManager
+    private var isPasswordVisible = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,7 +23,7 @@ class LoginActivity : AppCompatActivity() {
         sessionManager = SessionManager(this)
 
         // Memuat IP address server yang tersimpan agar tidak perlu mengetik ulang
-        binding.etServerIp.setText(sessionManager.getServerIp())
+//        binding.etServerIp.setText(sessionManager.getServerIp())
 
         // Cek jika user sudah login sebelumnya (Direct routing)
         if (sessionManager.isLoggedIn()) {
@@ -37,14 +38,29 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(this, RegisterActivity::class.java))
         }
 
-        binding.btnSaveIp.setOnClickListener {
-            val ip = binding.etServerIp.text.toString().trim()
-            if (ip.isNotEmpty()) {
-                sessionManager.saveServerIp(ip)
-                Toast.makeText(this, "IP Server disimpan: $ip", Toast.LENGTH_SHORT).show()
+//        binding.btnSaveIp.setOnClickListener {
+//            val ip = binding.etServerIp.text.toString().trim()
+//            if (ip.isNotEmpty()) {
+//                sessionManager.saveServerIp(ip)
+//                Toast.makeText(this, "IP Server disimpan: $ip", Toast.LENGTH_SHORT).show()
+//            } else {
+//                Toast.makeText(this, "IP tidak boleh kosong", Toast.LENGTH_SHORT).show()
+//            }
+//        }
+
+        // Logika kustom untuk toggle show/hide password (menggantikan passwordToggleEnabled lama)
+        binding.ivTogglePassword.setOnClickListener {
+            isPasswordVisible = !isPasswordVisible
+            if (isPasswordVisible) {
+                // Tampilkan password text asli
+                binding.etPassword.transformationMethod = android.text.method.HideReturnsTransformationMethod.getInstance()
+                // Ganti icon mata jika ada asetnya, atau biarkan bawaan android jika memakai ic_menu_view
             } else {
-                Toast.makeText(this, "IP tidak boleh kosong", Toast.LENGTH_SHORT).show()
+                // Sembunyikan password (kembali jadi dot/bullet)
+                binding.etPassword.transformationMethod = android.text.method.PasswordTransformationMethod.getInstance()
             }
+            // Kembalikan posisi kursor teks ke bagian paling akhir agar tidak lompat ke depan
+            binding.etPassword.setSelection(binding.etPassword.text.length)
         }
     }
 
@@ -52,33 +68,30 @@ class LoginActivity : AppCompatActivity() {
         val email = binding.etEmail.text.toString().trim()
         val password = binding.etPassword.text.toString().trim()
 
-        // IMK: Pencegahan Kesalahan (Error Prevention)
+        // IMK: Pencegahan Kesalahan (Error Prevention) langsung pada EditText
         if (email.isEmpty()) {
-            binding.tilEmail.error = "Email tidak boleh kosong"
+            binding.etEmail.error = "Email tidak boleh kosong"
+            binding.etEmail.requestFocus()
             return
-        } else {
-            binding.tilEmail.error = null
         }
 
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            binding.tilEmail.error = "Format email tidak valid"
+            binding.etEmail.error = "Format email tidak valid"
+            binding.etEmail.requestFocus()
             return
-        } else {
-            binding.tilEmail.error = null
         }
 
         if (password.isEmpty()) {
-            binding.tilPassword.error = "Kata sandi tidak boleh kosong"
+            binding.etPassword.error = "Kata sandi tidak boleh kosong"
+            binding.etPassword.requestFocus()
             return
-        } else {
-            binding.tilPassword.error = null
         }
 
         // Simpan IP Address yang sedang aktif ke Retrofit client
-        val ip = binding.etServerIp.text.toString().trim()
-        if (ip.isNotEmpty()) {
-            sessionManager.saveServerIp(ip)
-        }
+//        val ip = binding.etServerIp.text.toString().trim()
+//        if (ip.isNotEmpty()) {
+//            sessionManager.saveServerIp(ip)
+//        }
 
         // Tampilkan loading indicator (Feedback IMK)
         binding.progressBar.visibility = View.VISIBLE
@@ -89,7 +102,7 @@ class LoginActivity : AppCompatActivity() {
         binding.root.postDelayed({
             binding.progressBar.visibility = View.GONE
             binding.btnLogin.isEnabled = true
-            
+
             // Simpan session pengguna (Nama default & data dummy untuk login)
             sessionManager.saveSession(
                 userId = 1,

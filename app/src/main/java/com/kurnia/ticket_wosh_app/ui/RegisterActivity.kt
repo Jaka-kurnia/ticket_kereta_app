@@ -19,6 +19,7 @@ class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
     private lateinit var sessionManager: SessionManager
+    private var isPasswordVisible = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,69 +28,101 @@ class RegisterActivity : AppCompatActivity() {
 
         sessionManager = SessionManager(this)
 
-        binding.btnRegister.setOnClickListener {
+        // Menggunakan ID baru: btnRegisterSubmit
+        binding.btnRegisterSubmit.setOnClickListener {
             performRegister()
         }
 
-        binding.btnGoToLogin.setOnClickListener {
+        // Menggunakan ID baru: btnBackToLogin (Teks "Login" di bagian bawah)
+        binding.btnBackToLogin.setOnClickListener {
             finish()
+        }
+
+        // Fitur Baru: Tombol Back (Panah putih di Header Merah)
+        binding.btnBack.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
+
+        // Fitur Baru: Logika manual klik mata untuk Show/Hide Password
+        binding.ivToggleRegisterPassword.setOnClickListener {
+            isPasswordVisible = !isPasswordVisible
+            if (isPasswordVisible) {
+                // Tampilkan password asli
+                binding.etRegisterPassword.transformationMethod = android.text.method.HideReturnsTransformationMethod.getInstance()
+            } else {
+                // Sembunyikan password menjadi dot/bullet
+                binding.etRegisterPassword.transformationMethod = android.text.method.PasswordTransformationMethod.getInstance()
+            }
+            // Kembalikan posisi kursor ketikan ke bagian paling akhir
+            binding.etRegisterPassword.setSelection(binding.etRegisterPassword.text.length)
         }
     }
 
     private fun performRegister() {
+        // Penyesuaian variabel ID EditText yang baru
         val fullName = binding.etFullName.text.toString().trim()
-        val email = binding.etEmail.text.toString().trim()
+        val email = binding.etRegisterEmail.text.toString().trim()
         val phone = binding.etPhone.text.toString().trim()
-        val password = binding.etPassword.text.toString().trim()
+        val password = binding.etRegisterPassword.text.toString().trim()
 
-        // IMK: Pencegahan Kesalahan (Error Prevention)
+        // IMK: Pencegahan Kesalahan (Error dialihkan langsung ke EditText karena TextInputLayout dilepas)
         if (fullName.isEmpty()) {
-            binding.tilFullName.error = "Nama lengkap tidak boleh kosong"
+            binding.etFullName.error = "Nama lengkap tidak boleh kosong"
+            binding.etFullName.requestFocus()
             return
-        } else {
-            binding.tilFullName.error = null
         }
 
         if (email.isEmpty()) {
-            binding.tilEmail.error = "Email tidak boleh kosong"
+            binding.etRegisterEmail.error = "Email tidak boleh kosong"
+            binding.etRegisterEmail.requestFocus()
             return
-        } else {
-            binding.tilEmail.error = null
         }
 
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            binding.tilEmail.error = "Format email tidak valid"
+            binding.etRegisterEmail.error = "Format email tidak valid"
+            binding.etRegisterEmail.error = "Format email tidak valid"
+            binding.etRegisterEmail.requestFocus()
             return
-        } else {
-            binding.tilEmail.error = null
         }
 
         if (phone.isEmpty()) {
-            binding.tilPhone.error = "Nomor telepon tidak boleh kosong"
+            binding.etPhone.error = "Nomor telepon tidak boleh kosong"
+            binding.etPhone.requestFocus()
             return
-        } else {
-            binding.tilPhone.error = null
         }
 
         if (password.isEmpty()) {
-            binding.tilPassword.error = "Kata sandi tidak boleh kosong"
+            binding.etRegisterPassword.error = "Kata sandi tidak boleh kosong"
+            binding.etRegisterPassword.requestFocus()
             return
-        } else {
-            binding.tilPassword.error = null
+        }
+
+        if (password.length < 6) {
+            binding.etRegisterPassword.error = "Kata sandi minimal harus 6 karakter"
+            binding.etRegisterPassword.requestFocus()
+            return
+        }
+
+        // Validasi Tambahan: Checkbox Syarat & Ketentuan wajib dicentang
+        if (!binding.cbTerms.isChecked) {
+            Toast.makeText(this, "Anda harus menyetujui Syarat & Ketentuan", Toast.LENGTH_LONG).show()
+            binding.cbTerms.requestFocus()
+            return
         }
 
         // Tampilkan loading indicator (Umpan balik langsung IMK)
-        binding.progressBar.visibility = View.VISIBLE
-        binding.btnRegister.isEnabled = false
+        // Menggunakan tombol submit yang di-disable sebagai pengganti ProgressBar
+        binding.btnRegisterSubmit.isEnabled = false
+        binding.btnRegisterSubmit.text = "Processing..."
 
-        // payload JSON sesuai target tugas: {"full_name": "...", "email": "...", "password": "...", "phone": "..."}
+        // Payload JSON tetap aman sesuai model struktur tugasmu
         val request = RegisterRequest(fullName, email, password, phone)
 
         // Memanggil API register.php secara asinkron
         RetrofitClient.instance.registerUser(request).enqueue(object : Callback<RegisterResponse> {
             override fun onResponse(call: Call<RegisterResponse>, response: Response<RegisterResponse>) {
-                binding.progressBar.visibility = View.GONE
-                binding.btnRegister.isEnabled = true
+                binding.btnRegisterSubmit.isEnabled = true
+                binding.btnRegisterSubmit.text = "Register  ➔"
 
                 // Baris kode penanganan data sukses dari endpoint register.php
                 if (response.isSuccessful && response.body() != null) {
@@ -98,9 +131,9 @@ class RegisterActivity : AppCompatActivity() {
                         // Simpan user session dari respons register sukses
                         val userId = registerResponse.userId ?: 1
                         sessionManager.saveSession(userId, fullName, email, phone)
-                        
+
                         Toast.makeText(this@RegisterActivity, "Pendaftaran berhasil!", Toast.LENGTH_SHORT).show()
-                        
+
                         // Pindah ke Halaman Utama (HomeActivity)
                         val intent = Intent(this@RegisterActivity, HomeActivity::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -115,8 +148,8 @@ class RegisterActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
-                binding.progressBar.visibility = View.GONE
-                binding.btnRegister.isEnabled = true
+                binding.btnRegisterSubmit.isEnabled = true
+                binding.btnRegisterSubmit.text = "Register  ➔"
                 // Umpan Balik pesan Error jika koneksi internet/server gagal
                 Toast.makeText(this@RegisterActivity, "Koneksi gagal: ${t.localizedMessage}", Toast.LENGTH_LONG).show()
             }
