@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgLight"
+    tools:context=".ui.SeatSelectionActivity">
+
+    <!-- Header / Toolbar -->
+    <LinearLayout
+        android:id="@+id/layoutToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/ic_menu_revert"
+            app:tint="@color/white"
+            android:contentDescription="Kembali" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Pilih Kursi &amp; Data Penumpang"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/btnProceed"
+        app:layout_constraintTop_toBottomOf="@id/layoutToolbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- Seat Legend -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginBottom="24dp">
+
+                <!-- Legend Available -->
+                <View
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:background="@color/seatAvailable" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" Tersedia"
+                    android:textSize="12sp"
+                    android:textColor="@color/textDark"
+                    android:layout_marginEnd="16dp" />
+
+                <!-- Legend Occupied -->
+                <View
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:background="@color/seatOccupied" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" Terisi"
+                    android:textSize="12sp"
+                    android:textColor="@color/textDark"
+                    android:layout_marginEnd="16dp" />
+
+                <!-- Legend Selected -->
+                <View
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:background="@color/seatSelected" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" Pilihanmu"
+                    android:textSize="12sp"
+                    android:textColor="@color/textDark" />
+            </LinearLayout>
+
+            <!-- Carriage Header Indicator -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Gerbong Ekonomi - Premium"
+                android:textColor="@color/textDark"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Seat Grid Simulation Layout -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/cardBg"
+                app:cardCornerRadius="16dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/surfaceGrey"
+                android:layout_marginBottom="24dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp"
+                    android:gravity="center_horizontal">
+
+                    <!-- Rows of Seats -->
+                    <!-- Row 1 -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginVertical="4dp">
+
+                        <Button android:id="@+id/seatA1" style="@style/Widget.MaterialComponents.Button.UnelevatedButton" android:layout_width="48dp" android:layout_height="48dp" android:text="A1" android:textSize="11sp" android:layout_margin="4dp" android:backgroundTint="@color/seatAvailable" />
+                        <Button android:id="@+id/seatB1" style="@style/Widget.MaterialComponents.Button.UnelevatedButton" android:layout_width="48dp" android:layout_height="48dp" android:text="B1" android:textSize="11sp" android:layout_margin="4dp" android:backgroundTint="@color/seatAvailable" />
+                        
+                        <!-- Aisle -->
+                        <View android:layout_width="32dp" android:layout_height="48dp" />
+
+                        <Button android:id="@+id/seatC1" style="@style/Widget.MaterialComponents.Button.UnelevatedButton" android:layout_width="48dp" android:layout_height="48dp" android:text="C1" android:textSize="11sp" android:layout_margin="4dp" android:backgroundTint="@color/seatOccupied" />
+                        <Button android:id="@+id/seatD1" style="@style/Widget.MaterialComponents.Button.UnelevatedButton" android:layout_width="48dp" android:layout_height="48dp" android:text="D1" android:textSize="11sp" android:layout_margin="4dp" android:backgroundTint="@color/seatAvailable" />
+                    </LinearLayout>
+
+                    <!-- Row 2 -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginVertical="4dp">
+
+                        <Button android:id="@+id/seatA2" style="@style/Widget.MaterialComponents.Button.UnelevatedButton" android:layout_width="48dp" android:layout_height="48dp" android:text="A2" android:textSize="11sp" android:layout_margin="4dp" android:backgroundTint="@color/seatOccupied" />
+                        <Button android:id="@+id/seatB2" style="@style/Widget.MaterialComponents.Button.UnelevatedButton" android:layout_width="48dp" android:layout_height="48dp" android:text="B2" android:textSize="11sp" android:layout_margin="4dp" android:backgroundTint="@color/seatAvailable" />
+                        
+                        <!-- Aisle -->
+                        <View android:layout_width="32dp" android:layout_height="48dp" />
+
+                        <Button android:id="@+id/seatC2" style="@style/Widget.MaterialComponents.Button.UnelevatedButton" android:layout_width="48dp" android:layout_height="48dp" android:text="C2" android:textSize="11sp" android:layout_margin="4dp" android:backgroundTint="@color/seatAvailable" />
+                        <Button android:id="@+id/seatD2" style="@style/Widget.MaterialComponents.Button.UnelevatedButton" android:layout_width="48dp" android:layout_height="48dp" android:text="D2" android:textSize="11sp" android:layout_margin="4dp" android:backgroundTint="@color/seatOccupied" />
+                    </LinearLayout>
+
+                    <!-- Row 3 -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginVertical="4dp">
+
+                        <Button android:id="@+id/seatA3" style="@style/Widget.MaterialComponents.Button.UnelevatedButton" android:layout_width="48dp" android:layout_height="48dp" android:text="A3" android:textSize="11sp" android:layout_margin="4dp" android:backgroundTint="@color/seatAvailable" />
+                        <Button android:id="@+id/seatB3" style="@style/Widget.MaterialComponents.Button.UnelevatedButton" android:layout_width="48dp" android:layout_height="48dp" android:text="B3" android:textSize="11sp" android:layout_margin="4dp" android:backgroundTint="@color/seatAvailable" />
+                        
+                        <!-- Aisle -->
+                        <View android:layout_width="32dp" android:layout_height="48dp" />
+
+                        <Button android:id="@+id/seatC3" style="@style/Widget.MaterialComponents.Button.UnelevatedButton" android:layout_width="48dp" android:layout_height="48dp" android:text="C3" android:textSize="11sp" android:layout_margin="4dp" android:backgroundTint="@color/seatAvailable" />
+                        <Button android:id="@+id/seatD3" style="@style/Widget.MaterialComponents.Button.UnelevatedButton" android:layout_width="48dp" android:layout_height="48dp" android:text="D3" android:textSize="11sp" android:layout_margin="4dp" android:backgroundTint="@color/seatAvailable" />
+                    </LinearLayout>
+
+                    <!-- Row 4 -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginVertical="4dp">
+
+                        <Button android:id="@+id/seatA4" style="@style/Widget.MaterialComponents.Button.UnelevatedButton" android:layout_width="48dp" android:layout_height="48dp" android:text="A4" android:textSize="11sp" android:layout_margin="4dp" android:backgroundTint="@color/seatAvailable" />
+                        <Button android:id="@+id/seatB4" style="@style/Widget.MaterialComponents.Button.UnelevatedButton" android:layout_width="48dp" android:layout_height="48dp" android:text="B4" android:textSize="11sp" android:layout_margin="4dp" android:backgroundTint="@color/seatOccupied" />
+                        
+                        <!-- Aisle -->
+                        <View android:layout_width="32dp" android:layout_height="48dp" />
+
+                        <Button android:id="@+id/seatC4" style="@style/Widget.MaterialComponents.Button.UnelevatedButton" android:layout_width="48dp" android:layout_height="48dp" android:text="C4" android:textSize="11sp" android:layout_margin="4dp" android:backgroundTint="@color/seatAvailable" />
+                        <Button android:id="@+id/seatD4" style="@style/Widget.MaterialComponents.Button.UnelevatedButton" android:layout_width="48dp" android:layout_height="48dp" android:text="D4" android:textSize="11sp" android:layout_margin="4dp" android:backgroundTint="@color/seatAvailable" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Form Passenger Data -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/cardBg"
+                app:cardCornerRadius="16dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/surfaceGrey"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Informasi Penumpang"
+                        android:textColor="@color/textDark"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="16dp"/>
+
+                    <!-- Seat Selected Label -->
+                    <TextView
+                        android:id="@+id/tvSelectedSeatLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Kursi Terpilih: (Belum dipilih)"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:layout_marginBottom="16dp" />
+
+                    <!-- Nama Penumpang -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilPassengerName"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Nama Lengkap Penumpang"
+                        app:startIconDrawable="@android:drawable/ic_menu_myplaces"
+                        app:startIconTint="@color/colorPrimary">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etPassengerName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textPersonName"
+                            android:textColor="@color/textDark" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Nomor KTP/Paspor -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilPassengerId"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:hint="Nomor KTP / Paspor"
+                        app:startIconDrawable="@android:drawable/ic_dialog_info"
+                        app:startIconTint="@color/colorPrimary">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etPassengerId"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:textColor="@color/textDark" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btnProceed"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_margin="16dp"
+        android:text="Lanjutkan Ke Ringkasan"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:backgroundTint="@color/colorPrimary"
+        app:cornerRadius="8dp"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

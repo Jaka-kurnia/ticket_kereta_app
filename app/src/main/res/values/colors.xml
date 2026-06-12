@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    
+    <!-- Whoosh Brand Colors -->
+    <color name="colorPrimary">#C92127</color>
+    <color name="colorPrimaryDark">#9E161B</color>
+    <color name="colorAccent">#F5A623</color>
+    
+    <!-- UI Helpers -->
+    <color name="bgLight">#FAFAFC</color>
+    <color name="cardBg">#FFFFFF</color>
+    <color name="surfaceGrey">#F1F3F5</color>
+    <color name="textDark">#2B2B2B</color>
+    <color name="textLight">#8E8E93</color>
+    
+    <!-- Seat States -->
+    <color name="seatAvailable">#2EC4B6</color>
+    <color name="seatOccupied">#D1D1D6</color>
+    <color name="seatSelected">#C92127</color>
+</resources>
