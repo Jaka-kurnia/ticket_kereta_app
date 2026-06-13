@@ -51,9 +51,12 @@ class SearchResultActivity : AppCompatActivity() {
             binding.layoutError.visibility = View.GONE
 
             // Inisialisasi adapter kartu jadwal
-            adapter = ScheduleAdapter(schedules) { selectedSchedule ->
+            adapter = ScheduleAdapter(schedules, depName, arrName) { selectedSchedule ->
                 val intentSeat = Intent(this, SeatSelectionActivity::class.java).apply {
                     putExtra("SELECTED_SCHEDULE", selectedSchedule)
+                    putExtra("DEP_NAME", depName)
+                    putExtra("ARR_NAME", arrName)
+                    putExtra("DATE", date)
                 }
                 startActivity(intentSeat)
             }

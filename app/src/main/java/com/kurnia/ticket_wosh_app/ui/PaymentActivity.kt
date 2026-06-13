@@ -135,11 +135,15 @@ class PaymentActivity : AppCompatActivity() {
         binding.layoutPending.visibility = View.GONE
         binding.layoutPaid.visibility = View.VISIBLE
 
+        val depName = intent.getStringExtra("DEP_NAME") ?: ""
+        val arrName = intent.getStringExtra("ARR_NAME") ?: ""
+        val date = intent.getStringExtra("DATE") ?: ""
+
         // Isi data tiket digital
         binding.tvTicketCode.text = bookingCode
         binding.tvTicketTrainName.text = schedule.trainName
-        binding.tvTicketRoute.text = "${schedule.departureStation} ➔ ${schedule.arrivalStation}"
-        binding.tvTicketDate.text = "${schedule.date} | ${schedule.departureTime} WIB"
+        binding.tvTicketRoute.text = "$depName ➔ $arrName"
+        binding.tvTicketDate.text = "$date | ${schedule.departureTime} WIB"
         binding.tvTicketPassenger.text = "Nama: $passengerName"
         binding.tvTicketSeat.text = "Kursi: $seatName"
 

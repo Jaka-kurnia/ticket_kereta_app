@@ -54,9 +54,13 @@ class CheckoutActivity : AppCompatActivity() {
     }
 
     private fun setupUI() {
+        val depName = intent.getStringExtra("DEP_NAME") ?: ""
+        val arrName = intent.getStringExtra("ARR_NAME") ?: ""
+        val date = intent.getStringExtra("DATE") ?: ""
+
         binding.tvCheckoutTrainName.text = schedule.trainName
-        binding.tvCheckoutRoute.text = "${schedule.departureStation} ➔ ${schedule.arrivalStation}"
-        binding.tvCheckoutDateTime.text = "${schedule.date} | ${schedule.departureTime} - ${schedule.arrivalTime} WIB"
+        binding.tvCheckoutRoute.text = "$depName ➔ $arrName"
+        binding.tvCheckoutDateTime.text = "$date | ${schedule.departureTime} - ${schedule.arrivalTime} WIB"
 
         binding.tvCheckoutPassengerName.text = "Nama: $passengerName"
         binding.tvCheckoutPassengerId.text = "KTP/Paspor: $passengerId"
@@ -80,7 +84,7 @@ class CheckoutActivity : AppCompatActivity() {
         val passengers = listOf(BookingPassenger(passengerName, passengerId, seatId))
         val request = BookingRequest(
             userId = sessionManager.getUserId(),
-            scheduleId = schedule.id,
+            scheduleId = schedule.scheduleId,
             passengers = passengers
         )
 
@@ -126,12 +130,19 @@ class CheckoutActivity : AppCompatActivity() {
     }
 
     private fun goToPayment(bookingCode: String, totalPrice: Double) {
+        val depName = intent.getStringExtra("DEP_NAME") ?: ""
+        val arrName = intent.getStringExtra("ARR_NAME") ?: ""
+        val date = intent.getStringExtra("DATE") ?: ""
+
         val intentPayment = Intent(this@CheckoutActivity, PaymentActivity::class.java).apply {
             putExtra("BOOKING_CODE", bookingCode)
             putExtra("TOTAL_PRICE", totalPrice)
             putExtra("SELECTED_SCHEDULE", schedule)
             putExtra("PASSENGER_NAME", passengerName)
             putExtra("SEAT_NAME", seatName)
+            putExtra("DEP_NAME", depName)
+            putExtra("ARR_NAME", arrName)
+            putExtra("DATE", date)
         }
         startActivity(intentPayment)
         finish()

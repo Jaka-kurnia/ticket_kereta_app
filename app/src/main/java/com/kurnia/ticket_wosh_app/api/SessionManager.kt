@@ -53,9 +53,7 @@ class SessionManager(context: Context) {
     }
 
     fun getServerIp(): String {
-        val savedIp = prefs.getString(KEY_SERVER_IP, "192.168.100.12") ?: "192.168.100.12"
-        RetrofitClient.updateIpAddress(savedIp)
-        return savedIp
+        return RetrofitClient.IP_LAPTOP_KAMU
     }
 
     fun logout() {

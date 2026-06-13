@@ -1,26 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bgLight"
+    android:background="#F8F9FA"
     tools:context=".ui.HomeActivity">
 
-    <!-- Top Red Gradient Background (like BRImo header) -->
+    <!-- Top Red Gradient Background (Header Merah) -->
     <View
         android:id="@+id/headerBg"
         android:layout_width="match_parent"
-        android:layout_height="220dp"
+        android:layout_height="240dp"
         android:background="@color/colorPrimary"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Top Bar Header -->
+    <!-- Top Bar Header (Salam & Tombol Notif/Logout) -->
     <RelativeLayout
         android:id="@+id/topBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="20dp"
+        android:paddingHorizontal="24dp"
+        android:paddingTop="24dp"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
@@ -33,27 +35,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Selamat Pagi,"
-                android:textColor="@color/white"
-                android:alpha="0.8"
-                android:textSize="12sp" />
+                android:textColor="#FFCDD2"
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/tvUserName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
                 android:text="Kurnia Woosh"
-                android:textColor="@color/white"
-                android:textSize="18sp"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <!-- Notification & Logout Controls -->
+        <!-- Controls -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:layout_centerVertical="true"
+            android:orientation="horizontal">
 
             <ImageButton
                 android:id="@+id/btnNotification"
@@ -61,8 +63,8 @@
                 android:layout_height="40dp"
                 android:background="?android:attr/selectableItemBackgroundBorderless"
                 android:src="@android:drawable/ic_popup_reminder"
-                app:tint="@color/white"
-                android:contentDescription="Notification" />
+                android:contentDescription="Notification"
+                app:tint="@android:color/white" />
 
             <ImageButton
                 android:id="@+id/btnHomeLogout"
@@ -71,8 +73,8 @@
                 android:layout_marginStart="8dp"
                 android:background="?android:attr/selectableItemBackgroundBorderless"
                 android:src="@android:drawable/ic_lock_power_off"
-                app:tint="@color/white"
-                android:contentDescription="Logout" />
+                android:contentDescription="Logout"
+                app:tint="@android:color/white" />
         </LinearLayout>
     </RelativeLayout>
 
@@ -81,6 +83,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fillViewport="true"
+        android:clipToPadding="false"
         app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
         app:layout_constraintTop_toBottomOf="@id/topBar">
 
@@ -88,70 +91,522 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingHorizontal="20dp">
+            android:paddingBottom="24dp">
 
-            <!-- Wallet / Point Info Card (BRImo Account style card) -->
+            <!-- Wallet / Point Info Card (Model Pil sesuai screen_2.png) -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardWallet"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:cardBackgroundColor="@color/cardBg"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="6dp"
-                app:strokeWidth="0dp">
+                android:layout_marginTop="16dp"
+                android:layout_marginHorizontal="24dp"
+                app:cardBackgroundColor="#33FFFFFF"
+                app:cardCornerRadius="20dp"
+                app:strokeWidth="0dp"
+                app:cardElevation="0dp">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="20dp">
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp">
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Whoosh Card &amp; Points"
-                            android:textColor="@color/textLight"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:text="Premium Class"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
-                    </RelativeLayout>
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@android:drawable/ic_input_add"
+                        app:tint="@android:color/white" />
 
                     <TextView
                         android:id="@+id/tvWoshPoints"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginStart="8dp"
                         android:text="12,450 Pts"
-                        android:textColor="@color/textDark"
-                        android:textSize="24sp"
+                        android:textColor="@android:color/white"
+                        android:textSize="13sp"
                         android:textStyle="bold" />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/surfaceGrey"
-                        android:layout_marginVertical="12dp" />
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:layout_marginStart="6dp"
+                        android:src="@android:drawable/ic_input_add"
+                        app:tint="@android:color/white" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
+            <!-- CONTAINER KARTU PUTIH UTAMA (Menutup sebagian Header Merah) -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="24dp"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="18dp"
+                app:cardElevation="4dp"
+                app:strokeWidth="0dp">
+
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:columnCount="4"
+                    android:padding="12dp"
+                    android:alignmentMode="alignMargins"
+                    android:columnOrderPreserved="false">
+
+                    <!-- Menu 1: Pesan Tiket -->
+                    <LinearLayout
+                        android:id="@+id/menuBookTicket"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:clickable="true"
+                        android:focusable="true">
+                        <View
+                            android:layout_width="46dp"
+                            android:layout_height="46dp"
+                            android:background="@android:color/darker_gray"
+                            android:foreground="@android:drawable/ic_menu_my_calendar"
+                            android:foregroundGravity="center" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Pesan Tiket"
+                            android:textSize="11sp"
+                            android:textColor="#333333"
+                            android:gravity="center"
+                            android:layout_marginTop="8dp"/>
+                    </LinearLayout>
+
+                    <!-- Menu 2: Tiket Saya -->
+                    <LinearLayout
+                        android:id="@+id/menuMyTicket"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:clickable="true"
+                        android:focusable="true">
+                        <View
+                            android:layout_width="46dp"
+                            android:layout_height="46dp"
+                            android:background="@android:color/darker_gray"
+                            android:foreground="@android:drawable/ic_menu_gallery"
+                            android:foregroundGravity="center" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Tiket Saya"
+                            android:textSize="11sp"
+                            android:textColor="#333333"
+                            android:gravity="center"
+                            android:layout_marginTop="8dp"/>
+                    </LinearLayout>
+
+                    <!-- Menu 3: Rute Map -->
+                    <LinearLayout
+                        android:id="@+id/menuRoutes"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:clickable="true"
+                        android:focusable="true">
+                        <View
+                            android:layout_width="46dp"
+                            android:layout_height="46dp"
+                            android:background="@android:color/darker_gray"
+                            android:foreground="@android:drawable/ic_dialog_map"
+                            android:foregroundGravity="center" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rute Kereta"
+                            android:textSize="11sp"
+                            android:textColor="#333333"
+                            android:gravity="center"
+                            android:layout_marginTop="8dp"/>
+                    </LinearLayout>
+
+                    <!-- Menu 4: Refund -->
+                    <LinearLayout
+                        android:id="@+id/menuRefund"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:clickable="true"
+                        android:focusable="true">
+                        <View
+                            android:layout_width="46dp"
+                            android:layout_height="46dp"
+                            android:background="@android:color/darker_gray"
+                            android:foreground="@android:drawable/ic_menu_revert"
+                            android:foregroundGravity="center" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Refund"
+                            android:textSize="11sp"
+                            android:textColor="#333333"
+                            android:gravity="center"
+                            android:layout_marginTop="8dp"/>
+                    </LinearLayout>
+
+                    <!-- Baris 2 Grid Menu -->
+                    <!-- Menu 5: Jadwal -->
+                    <LinearLayout
+                        android:id="@+id/menuSchedules"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:layout_marginTop="12dp"
+                        android:clickable="true"
+                        android:focusable="true">
+                        <View
+                            android:layout_width="46dp"
+                            android:layout_height="46dp"
+                            android:background="@android:color/darker_gray"
+                            android:foreground="@android:drawable/ic_menu_info_details"
+                            android:foregroundGravity="center" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Jadwal"
+                            android:textSize="11sp"
+                            android:textColor="#333333"
+                            android:gravity="center"
+                            android:layout_marginTop="8dp"/>
+                    </LinearLayout>
+
+                    <!-- Menu 6: Stasiun -->
+                    <LinearLayout
+                        android:id="@+id/menuStations"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:layout_marginTop="12dp"
+                        android:clickable="true"
+                        android:focusable="true">
+                        <View
+                            android:layout_width="46dp"
+                            android:layout_height="46dp"
+                            android:background="@android:color/darker_gray"
+                            android:foreground="@android:drawable/ic_menu_compass"
+                            android:foregroundGravity="center" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Stasiun"
+                            android:textSize="11sp"
+                            android:textColor="#333333"
+                            android:gravity="center"
+                            android:layout_marginTop="8dp"/>
+                    </LinearLayout>
+
+                    <!-- Menu 7: Kuliner -->
+                    <LinearLayout
+                        android:id="@+id/menuFood"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:layout_marginTop="12dp"
+                        android:clickable="true"
+                        android:focusable="true">
+                        <View
+                            android:layout_width="46dp"
+                            android:layout_height="46dp"
+                            android:background="@android:color/darker_gray"
+                            android:foreground="@android:drawable/ic_menu_view"
+                            android:foregroundGravity="center" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Kuliner"
+                            android:textSize="11sp"
+                            android:textColor="#333333"
+                            android:gravity="center"
+                            android:layout_marginTop="8dp"/>
+                    </LinearLayout>
+
+                    <!-- Menu 8: Bantuan -->
+                    <LinearLayout
+                        android:id="@+id/menuSupport"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="8dp"
+                        android:layout_marginTop="12dp"
+                        android:clickable="true"
+                        android:focusable="true">
+                        <View
+                            android:layout_width="46dp"
+                            android:layout_height="46dp"
+                            android:background="@android:color/darker_gray"
+                            android:foreground="@android:drawable/ic_menu_call"
+                            android:foregroundGravity="center" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Bantuan"
+                            android:textSize="11sp"
+                            android:textColor="#333333"
+                            android:gravity="center"
+                            android:layout_marginTop="8dp"/>
+                    </LinearLayout>
+                </GridLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- SECTION 1: RECENT ACTIVITY (Aktivitas Terbaru) -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="32dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Recent Activity"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="#222222" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:text="See All"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <!-- Item Aktivitas 1 -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="12dp"
+                app:cardCornerRadius="14dp"
+                app:strokeWidth="0dp"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardElevation="2dp">
+                <RelativeLayout
+                    android:padding="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <View
+                        android:id="@+id/iconAct1"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@android:color/darker_gray"/>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_toEndOf="@id/iconAct1"
+                        android:layout_marginStart="12dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Brussels ➔ London"
+                            android:textStyle="bold"
+                            android:textColor="#222222"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Yesterday, 14:15 • Ticket Purchased"
+                            android:textSize="12sp"
+                            android:textColor="#777777"/>
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:text="-€89.00"
+                        android:textColor="@color/colorPrimary"
+                        android:textStyle="bold"
+                        android:textSize="16sp"/>
+                </RelativeLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- SECTION 2: PROMO MENARIK (Horizontal Slide) -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="28dp"
+                android:text="Promo Menarik"
+                android:textColor="#222222"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none"
+                android:layout_marginTop="12dp">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="24dp">
+
+                    <!-- Kartu Bawaan Bertindak Sebagai Promo 1 -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="270dp"
+                        android:layout_height="150dp"
+                        android:layout_marginEnd="16dp"
+                        app:cardCornerRadius="14dp"
+                        app:strokeWidth="0dp"
+                        app:cardElevation="2dp">
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                            <!-- Background Mock Gambar Promo -->
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="#A9121B" />
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:orientation="vertical"
+                                android:padding="14dp"
+                                android:background="#99000000">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Cashback 20% Pakai QRIS"
+                                    android:textColor="@android:color/white"
+                                    android:textStyle="bold"
+                                    android:textSize="14sp"/>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Dapatkan diskon khusus tiket Whoosh."
+                                    android:textColor="#DDDDDD"
+                                    android:textSize="11sp"
+                                    android:layout_marginTop="2dp"/>
+                            </LinearLayout>
+                        </FrameLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <!-- SECTION 3: UPCOMING TRIP (Perjalanan Mendatang - Gelap) -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="28dp"
+                android:text="Upcoming Trip"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#222222" />
+
+            <!-- Sub-container Internal untuk menyatukan 3 Tombol Action lamamu ke dalam komponen fungsional -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="12dp"
+                app:cardCornerRadius="16dp"
+                app:cardBackgroundColor="#2C3135"
+                app:strokeWidth="0dp"
+                app:cardElevation="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="NEXT TRIP • OCT 12"
+                            android:textColor="#99FFFFFF"
+                            android:textSize="11sp"
+                            android:textStyle="bold"/>
+                    </RelativeLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="Brussels ➔ London"
+                        android:textColor="@android:color/white"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <!-- Jalur Navigasi Waktu Tengah -->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:background="#3D4347"
+                        android:padding="12dp">
+                        <TextView
+                            android:id="@+id/timeStart"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="14:15"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"/>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="#55FFFFFF"
+                            android:layout_toEndOf="@id/timeStart"
+                            android:layout_toStartOf="@id/timeEnd"
+                            android:layout_centerVertical="true"
+                            android:layout_marginHorizontal="16dp"/>
+                        <TextView
+                            android:id="@+id/timeEnd"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:text="15:25"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"/>
+                    </RelativeLayout>
+
+                    <!-- Row Action Bawaan: TopUp, Promo, QRScan disematkan rapi di dalam tiket -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:layout_marginTop="16dp">
 
-                        <!-- Action Item 1 -->
                         <LinearLayout
                             android:id="@+id/btnTopUp"
                             android:layout_width="0dp"
@@ -162,20 +617,19 @@
                             android:clickable="true"
                             android:focusable="true">
                             <ImageView
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
+                                android:layout_width="22dp"
+                                android:layout_height="22dp"
                                 android:src="@android:drawable/ic_input_add"
-                                app:tint="@color/colorPrimary" />
+                                app:tint="@android:color/white" />
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Top Up"
                                 android:textSize="11sp"
-                                android:textColor="@color/textDark"
+                                android:textColor="#DDDDDD"
                                 android:layout_marginTop="4dp"/>
                         </LinearLayout>
 
-                        <!-- Action Item 2 -->
                         <LinearLayout
                             android:id="@+id/btnPromo"
                             android:layout_width="0dp"
@@ -186,20 +640,19 @@
                             android:clickable="true"
                             android:focusable="true">
                             <ImageView
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
+                                android:layout_width="22dp"
+                                android:layout_height="22dp"
                                 android:src="@android:drawable/btn_star_big_on"
-                                app:tint="@color/colorAccent" />
+                                app:tint="#FFCC00" />
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Promo"
                                 android:textSize="11sp"
-                                android:textColor="@color/textDark"
+                                android:textColor="#DDDDDD"
                                 android:layout_marginTop="4dp"/>
                         </LinearLayout>
 
-                        <!-- Action Item 3 -->
                         <LinearLayout
                             android:id="@+id/btnQRScan"
                             android:layout_width="0dp"
@@ -210,321 +663,18 @@
                             android:clickable="true"
                             android:focusable="true">
                             <ImageView
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
+                                android:layout_width="22dp"
+                                android:layout_height="22dp"
                                 android:src="@android:drawable/ic_dialog_map"
-                                app:tint="@color/colorPrimary" />
+                                app:tint="@android:color/white" />
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Scan Gate"
                                 android:textSize="11sp"
-                                android:textColor="@color/textDark"
+                                android:textColor="#DDDDDD"
                                 android:layout_marginTop="4dp"/>
                         </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Quick Access Menu Grid (BRImo style 4x2) -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="Layanan Utama"
-                android:textColor="@color/textDark"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
-            <GridLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:columnCount="4"
-                android:layout_marginTop="12dp"
-                android:alignmentMode="alignMargins"
-                android:columnOrderPreserved="false">
-
-                <!-- Menu 1: Pesan Tiket -->
-                <LinearLayout
-                    android:id="@+id/menuBookTicket"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:padding="8dp"
-                    android:clickable="true"
-                    android:focusable="true">
-                    <View
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:background="@drawable/circle_bg_primary"
-                        android:foreground="@android:drawable/ic_menu_my_calendar"
-                        android:foregroundGravity="center"
-                        android:foregroundTint="@color/white" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Pesan Tiket"
-                        android:textSize="11sp"
-                        android:textColor="@color/textDark"
-                        android:gravity="center"
-                        android:layout_marginTop="6dp"/>
-                </LinearLayout>
-
-                <!-- Menu 2: Tiket Saya -->
-                <LinearLayout
-                    android:id="@+id/menuMyTicket"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:padding="8dp"
-                    android:clickable="true"
-                    android:focusable="true">
-                    <View
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:background="@drawable/circle_bg_accent"
-                        android:foreground="@android:drawable/ic_menu_gallery"
-                        android:foregroundGravity="center"
-                        android:foregroundTint="@color/white" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Tiket Saya"
-                        android:textSize="11sp"
-                        android:textColor="@color/textDark"
-                        android:gravity="center"
-                        android:layout_marginTop="6dp"/>
-                </LinearLayout>
-
-                <!-- Menu 3: Rute Map -->
-                <LinearLayout
-                    android:id="@+id/menuRoutes"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:padding="8dp"
-                    android:clickable="true"
-                    android:focusable="true">
-                    <View
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:background="@drawable/circle_bg_blue"
-                        android:foreground="@android:drawable/ic_dialog_map"
-                        android:foregroundGravity="center"
-                        android:foregroundTint="@color/white" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Rute Kereta"
-                        android:textSize="11sp"
-                        android:textColor="@color/textDark"
-                        android:gravity="center"
-                        android:layout_marginTop="6dp"/>
-                </LinearLayout>
-
-                <!-- Menu 4: Refund -->
-                <LinearLayout
-                    android:id="@+id/menuRefund"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:padding="8dp"
-                    android:clickable="true"
-                    android:focusable="true">
-                    <View
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:background="@drawable/circle_bg_purple"
-                        android:foreground="@android:drawable/ic_menu_revert"
-                        android:foregroundGravity="center"
-                        android:foregroundTint="@color/white" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Refund"
-                        android:textSize="11sp"
-                        android:textColor="@color/textDark"
-                        android:gravity="center"
-                        android:layout_marginTop="6dp"/>
-                </LinearLayout>
-
-                <!-- Row 2 -->
-                <!-- Menu 5: Jadwal -->
-                <LinearLayout
-                    android:id="@+id/menuSchedules"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:padding="8dp"
-                    android:layout_marginTop="8dp"
-                    android:clickable="true"
-                    android:focusable="true">
-                    <View
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:background="@drawable/circle_bg_orange"
-                        android:foreground="@android:drawable/ic_menu_info_details"
-                        android:foregroundGravity="center"
-                        android:foregroundTint="@color/white" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Jadwal"
-                        android:textSize="11sp"
-                        android:textColor="@color/textDark"
-                        android:gravity="center"
-                        android:layout_marginTop="6dp"/>
-                </LinearLayout>
-
-                <!-- Menu 6: Stasiun -->
-                <LinearLayout
-                    android:id="@+id/menuStations"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:padding="8dp"
-                    android:layout_marginTop="8dp"
-                    android:clickable="true"
-                    android:focusable="true">
-                    <View
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:background="@drawable/circle_bg_teal"
-                        android:foreground="@android:drawable/ic_menu_compass"
-                        android:foregroundGravity="center"
-                        android:foregroundTint="@color/white" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Stasiun"
-                        android:textSize="11sp"
-                        android:textColor="@color/textDark"
-                        android:gravity="center"
-                        android:layout_marginTop="6dp"/>
-                </LinearLayout>
-
-                <!-- Menu 7: Food & Beverage -->
-                <LinearLayout
-                    android:id="@+id/menuFood"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:padding="8dp"
-                    android:layout_marginTop="8dp"
-                    android:clickable="true"
-                    android:focusable="true">
-                    <View
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:background="@drawable/circle_bg_green"
-                        android:foreground="@android:drawable/ic_menu_view"
-                        android:foregroundGravity="center"
-                        android:foregroundTint="@color/white" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Kuliner"
-                        android:textSize="11sp"
-                        android:textColor="@color/textDark"
-                        android:gravity="center"
-                        android:layout_marginTop="6dp"/>
-                </LinearLayout>
-
-                <!-- Menu 8: CS / Bantuan -->
-                <LinearLayout
-                    android:id="@+id/menuSupport"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_columnWeight="1"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:padding="8dp"
-                    android:layout_marginTop="8dp"
-                    android:clickable="true"
-                    android:focusable="true">
-                    <View
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:background="@drawable/circle_bg_gray"
-                        android:foreground="@android:drawable/ic_menu_call"
-                        android:foregroundGravity="center"
-                        android:foregroundTint="@color/white" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Bantuan"
-                        android:textSize="11sp"
-                        android:textColor="@color/textDark"
-                        android:gravity="center"
-                        android:layout_marginTop="6dp"/>
-                </LinearLayout>
-            </GridLayout>
-
-            <!-- Promo & Discounts (BRImo banner card style) -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="Promo Menarik"
-                android:textColor="@color/textDark"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="24dp"
-                app:cardCornerRadius="12dp"
-                app:strokeWidth="0dp"
-                app:cardElevation="2dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <!-- Mock Promo Banner Image -->
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="120dp"
-                        android:background="@color/colorPrimaryDark" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="12dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Cashback 20% Pakai QRIS BRImo"
-                            android:textColor="@color/textDark"
-                            android:textSize="14sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Dapatkan cashback langsung untuk setiap pemesanan tiket kereta cepat Whoosh menggunakan QRIS BRImo."
-                            android:textColor="@color/textLight"
-                            android:textSize="11sp"
-                            android:layout_marginTop="4dp" />
                     </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -532,16 +682,16 @@
         </LinearLayout>
     </ScrollView>
 
-    <!-- Bottom Navigation Bar (BRImo Style) -->
+    <!-- Bottom Navigation Bar (Sesuai ID lamamu) -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/cardBg"
+        android:layout_height="64dp"
+        android:background="@android:color/white"
         app:elevation="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/home_bottom_menu"
         app:itemIconTint="@color/colorPrimary"
-        app:itemTextColor="@color/textDark" />
+        app:itemTextColor="#333333" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

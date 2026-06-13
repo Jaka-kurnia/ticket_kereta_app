@@ -17,16 +17,34 @@ data class RegisterResponse(
     @SerializedName("user_id") val userId: Int?
 ) : Serializable
 
+// Halaman 1: Login Request & Response
+data class LoginRequest(
+    @SerializedName("email") val email: String,
+    @SerializedName("password") val password: String
+) : Serializable
+
+data class LoginResponse(
+    @SerializedName("status") val status: String,
+    @SerializedName("message") val message: String,
+    @SerializedName("user_id") val userId: Int?,
+    @SerializedName("full_name") val fullName: String?,
+    @SerializedName("phone") val phone: String?
+) : Serializable
+
 // Halaman 3: List Jadwal Model
 data class Schedule(
-    @SerializedName("id") val id: Int,
+    @SerializedName("schedule_id") val scheduleId: Int,
     @SerializedName("train_name") val trainName: String,
-    @SerializedName("departure_station") val departureStation: String,
-    @SerializedName("arrival_station") val arrivalStation: String,
+    @SerializedName("train_code") val trainCode: String?,
     @SerializedName("departure_time") val departureTime: String,
     @SerializedName("arrival_time") val arrivalTime: String,
-    @SerializedName("price") val price: Double,
-    @SerializedName("date") val date: String
+    @SerializedName("price") val price: Double
+) : Serializable
+
+data class ScheduleResponse(
+    @SerializedName("status") val status: String,
+    @SerializedName("total_found") val totalFound: Int,
+    @SerializedName("data") val data: List<Schedule>
 ) : Serializable
 
 // Halaman 5: Booking Request & Response

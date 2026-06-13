@@ -10,6 +10,8 @@ import java.util.Locale
 
 class ScheduleAdapter(
     private var schedules: List<Schedule>,
+    private val depStationName: String,
+    private val arrStationName: String,
     private val onSelectClick: (Schedule) -> Unit
 ) : RecyclerView.Adapter<ScheduleAdapter.ViewHolder>() {
 
@@ -24,8 +26,8 @@ class ScheduleAdapter(
         val schedule = schedules[position]
         with(holder.binding) {
             tvTrainName.text = schedule.trainName
-            tvDepStation.text = schedule.departureStation
-            tvArrStation.text = schedule.arrivalStation
+            tvDepStation.text = depStationName
+            tvArrStation.text = arrStationName
             tvDepartureTime.text = schedule.departureTime
             tvArrivalTime.text = schedule.arrivalTime
             

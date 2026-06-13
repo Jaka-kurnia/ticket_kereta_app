@@ -55,7 +55,7 @@
         android:background="@drawable/bg_white_card_top_rounded"
         android:fillViewport="true"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/layoutIp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
@@ -187,13 +187,41 @@
                 tools:visibility="visible" />
 
             <LinearLayout
+                android:id="@+id/layoutRegisterLink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/progressBar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Belum punya akun? "
+                    android:textColor="#555555"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/btnGoToRegister"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Daftar Sekarang"
+                    android:textColor="#E31E24"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:padding="4dp" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/layoutDivider"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:gravity="center"
                 android:orientation="horizontal"
-                app:layout_constraintTop_toBottomOf="@id/progressBar"
+                app:layout_constraintTop_toBottomOf="@id/layoutRegisterLink"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">
 
@@ -277,9 +305,11 @@
                 android:layout_width="0dp"
                 android:layout_height="100dp"
                 android:layout_marginTop="24dp"
+                android:layout_marginBottom="16dp"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="0dp"
                 app:layout_constraintTop_toBottomOf="@id/layoutSocialButtons"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">
 
@@ -310,76 +340,7 @@
                 </FrameLayout>
             </androidx.cardview.widget.CardView>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="8dp"
-                android:orientation="horizontal"
-                app:layout_constraintTop_toBottomOf="@id/cardBanner"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Belum punya akun? "
-                    android:textColor="#555555"
-                    android:textSize="13sp" />
-
-                <TextView
-                    android:id="@+id/btnGoToRegister"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Daftar Sekarang"
-                    android:textColor="#E31E24"
-                    android:textSize="13sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
-
-    <LinearLayout
-        android:id="@+id/layoutIp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:paddingHorizontal="24dp"
-        android:paddingVertical="8dp"
-        android:background="#F9F9F9"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Server IP: "-->
-<!--            android:textSize="12sp"-->
-<!--            android:textColor="#777777"/>-->
-
-<!--        <EditText-->
-<!--            android:id="@+id/etServerIp"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_weight="1"-->
-<!--            android:textSize="12sp"-->
-<!--            android:inputType="text"-->
-<!--            android:hint="192.168.100.12"-->
-<!--            android:textColorHint="#999999"-->
-<!--            android:textColor="#000000"/>-->
-
-<!--        <Button-->
-<!--            android:id="@+id/btnSaveIp"-->
-<!--            style="@style/Widget.MaterialComponents.Button.TextButton"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Simpan"-->
-<!--            android:textSize="11sp"-->
-<!--            android:textColor="#E31E24"/>-->
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

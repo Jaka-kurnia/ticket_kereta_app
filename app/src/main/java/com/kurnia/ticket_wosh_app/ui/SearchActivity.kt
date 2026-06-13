@@ -115,10 +115,10 @@ class SearchActivity : AppCompatActivity() {
         Toast.makeText(this, "Mencari jadwal dari $depName ke $arrName...", Toast.LENGTH_SHORT).show()
 
         // Panggil API get_schedules.php
-        RetrofitClient.instance.getSchedules(depId, arrId, date).enqueue(object : Callback<List<Schedule>> {
-            override fun onResponse(call: Call<List<Schedule>>, response: Response<List<Schedule>>) {
-                if (response.isSuccessful && response.body() != null && response.body()!!.isNotEmpty()) {
-                    val scheduleList = response.body()!!
+        com.kurnia.ticket_wosh_app.api.RetrofitClient.instance.getSchedules(depId, arrId, date).enqueue(object : retrofit2.Callback<com.kurnia.ticket_wosh_app.model.ScheduleResponse> {
+            override fun onResponse(call: retrofit2.Call<com.kurnia.ticket_wosh_app.model.ScheduleResponse>, response: retrofit2.Response<com.kurnia.ticket_wosh_app.model.ScheduleResponse>) {
+                if (response.isSuccessful && response.body() != null && response.body()!!.data.isNotEmpty()) {
+                    val scheduleList = response.body()!!.data
                     goToResults(depName, arrName, date, ArrayList(scheduleList))
                 } else {
                     // Fallback jika respons kosong / data di database server masih kosong
@@ -126,7 +126,7 @@ class SearchActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: Call<List<Schedule>>, t: Throwable) {
+            override fun onFailure(call: retrofit2.Call<com.kurnia.ticket_wosh_app.model.ScheduleResponse>, t: Throwable) {
                 // Fallback jika server backend offline / IP salah konfigurasi
                 useDemoFallback(depName, arrName, date, "Koneksi gagal: ${t.localizedMessage}")
             }
@@ -136,11 +136,11 @@ class SearchActivity : AppCompatActivity() {
     private fun useDemoFallback(depName: String, arrName: String, date: String, reason: String) {
         Toast.makeText(this, "$reason Mengaktifkan Mode Demo Whoosh!", Toast.LENGTH_LONG).show()
         
-        // Buat data jadwal tiruan (realistic mock data) agar user bisa melanjutkan alur tanpa error
+        // Buat data jadwal tiruan (realistic mock data) sesuai constructor baru yang sejalan dengan database Anda
         val mockSchedules = arrayListOf(
-            Schedule(1, "Whoosh Premium G1102", depName, arrName, "08:00", "08:45", 250000.0, date),
-            Schedule(2, "Whoosh Business G1203", depName, arrName, "11:30", "12:15", 300000.0, date),
-            Schedule(3, "Whoosh Fast G1508", depName, arrName, "15:45", "16:30", 250000.0, date)
+            Schedule(1, "Whoosh Premium G1102", "WSH1102", "08:00", "08:45", 250000.0),
+            Schedule(2, "Whoosh Business G1203", "WSH1203", "11:30", "12:15", 300000.0),
+            Schedule(3, "Whoosh Fast G1508", "WSH1508", "15:45", "16:30", 250000.0)
         )
         goToResults(depName, arrName, date, mockSchedules)
     }

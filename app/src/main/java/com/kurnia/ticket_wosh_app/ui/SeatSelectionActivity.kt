@@ -106,6 +106,10 @@ class SeatSelectionActivity : AppCompatActivity() {
             binding.tilPassengerId.error = null
         }
 
+        val depName = intent.getStringExtra("DEP_NAME") ?: ""
+        val arrName = intent.getStringExtra("ARR_NAME") ?: ""
+        val date = intent.getStringExtra("DATE") ?: ""
+
         // Lanjutkan ke halaman Checkout/Ringkasan Booking
         val intentCheckout = Intent(this, CheckoutActivity::class.java).apply {
             putExtra("SELECTED_SCHEDULE", schedule)
@@ -113,7 +117,11 @@ class SeatSelectionActivity : AppCompatActivity() {
             putExtra("SEAT_ID", selectedSeatId)
             putExtra("PASSENGER_NAME", passengerName)
             putExtra("PASSENGER_ID", passengerId)
+            putExtra("DEP_NAME", depName)
+            putExtra("ARR_NAME", arrName)
+            putExtra("DATE", date)
         }
         startActivity(intentCheckout)
+        finish()
     }
 }
