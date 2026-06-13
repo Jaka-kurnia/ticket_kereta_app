@@ -46,7 +46,7 @@
                 android:layout_height="40dp"
                 android:layout_alignParentEnd="true"
                 android:background="?android:attr/selectableItemBackgroundBorderless"
-                android:src="@android:drawable/ic_lock_power_off"
+                android:src="@android:drawable/ic_menu_close_clear_cancel"
                 app:tint="@color/white"
                 android:contentDescription="Logout" />
         </RelativeLayout>

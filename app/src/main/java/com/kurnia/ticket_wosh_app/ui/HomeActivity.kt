@@ -47,10 +47,7 @@ class HomeActivity : AppCompatActivity() {
 
         // Tiket Saya
         binding.menuMyTicket.setOnClickListener {
-            Toast.makeText(this, "Membuka riwayat tiket aktif Anda...", Toast.LENGTH_SHORT).show()
-            // Ke status pembayaran / tiket (simulasi data)
-            val intent = Intent(this, PaymentActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, HistoryActivity::class.java))
         }
 
         // Fitur Simulasi Tambahan (BRImo style)
@@ -110,11 +107,7 @@ class HomeActivity : AppCompatActivity() {
                     true
                 }
                 R.id.navigation_history -> {
-                    Toast.makeText(this, "Riwayat Transaksi Pemesanan Tiket", Toast.LENGTH_SHORT).show()
-                    true
-                }
-                R.id.navigation_inbox -> {
-                    Toast.makeText(this, "Pesan Masuk & Pengumuman Operasional", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this, HistoryActivity::class.java))
                     true
                 }
                 R.id.navigation_profile -> {

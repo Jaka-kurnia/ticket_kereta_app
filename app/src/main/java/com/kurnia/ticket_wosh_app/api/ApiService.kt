@@ -37,4 +37,8 @@ interface ApiService {
     // Mengubah status transaksi menjadi sukses (paid) dan mendapatkan QR Code tiket
     @POST("payment_callback.php")
     fun confirmPayment(@Body request: PaymentRequest): Call<PaymentResponse>
+
+    // Halaman History: Riwayat Pemesanan
+    @GET("get_history.php")
+    fun getHistory(@Query("user_id") userId: Int): Call<BookingHistoryResponse>
 }

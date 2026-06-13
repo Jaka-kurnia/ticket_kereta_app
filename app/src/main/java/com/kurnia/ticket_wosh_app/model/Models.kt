@@ -79,3 +79,22 @@ data class PaymentResponse(
     @SerializedName("message") val message: String,
     @SerializedName("qr_code") val qrCode: String?
 )
+
+// Halaman Riwayat Pemesanan (History)
+data class BookingHistory(
+    @SerializedName("booking_code") val bookingCode: String,
+    @SerializedName("total_price") val totalPrice: Double,
+    @SerializedName("status") val status: String,
+    @SerializedName("departure_station") val departureStation: String,
+    @SerializedName("arrival_station") val arrivalStation: String,
+    @SerializedName("date") val date: String,
+    @SerializedName("departure_time") val departureTime: String,
+    @SerializedName("arrival_time") val arrivalTime: String,
+    @SerializedName("train_name") val trainName: String
+) : Serializable
+
+data class BookingHistoryResponse(
+    @SerializedName("status") val status: String,
+    @SerializedName("message") val message: String,
+    @SerializedName("data") val data: List<BookingHistory>?
+) : Serializable

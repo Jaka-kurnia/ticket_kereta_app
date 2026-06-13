@@ -2,18 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/navigation_home"
-        android:icon="@drawable/ic_launcher_foreground"
+        android:icon="@drawable/ic_home"
         android:title="Home" />
     <item
         android:id="@+id/navigation_history"
-        android:icon="@drawable/ic_launcher_foreground"
-        android:title="Riwayat" />
-    <item
-        android:id="@+id/navigation_inbox"
-        android:icon="@drawable/ic_launcher_foreground"
-        android:title="Pesan" />
+        android:icon="@drawable/ic_ticket"
+        android:title="My Ticket" />
     <item
         android:id="@+id/navigation_profile"
-        android:icon="@drawable/ic_launcher_foreground"
-        android:title="Profil" />
+        android:icon="@drawable/ic_profile"
+        android:title="Profile" />
 </menu>
